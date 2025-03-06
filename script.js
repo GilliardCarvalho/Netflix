@@ -1,30 +1,53 @@
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 5, // Quantidade de slides visíveis
-        spaceBetween: 10, // Espaço entre os slides
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-            // Responsividade
-            320: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-            },
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            },
-            1024: {
-                slidesPerView: 5,
-                spaceBetween: 30,
-            },
-        },
+const sliders = document.querySelector(".carrosselBox");
+let scrollAmount = 0;
+let scrollPerClick = 100;
+const imagePadding = 20;
+
+function sliderScrollLeft() {
+  scrollAmount = Math.max(0, scrollAmount - scrollPerClick);
+  sliders.scrollTo({
+    top: 0,
+    left: scrollAmount,
+    behavior: "smooth",
+  });
+}
+
+function sliderScrollRight() {
+  const maxScrollLeft = sliders.scrollWidth - sliders.clientWidth;
+  if (scrollAmount < maxScrollLeft) {
+    scrollAmount = Math.min(maxScrollLeft, scrollAmount + scrollPerClick);
+    sliders.scrollTo({
+      top: 0,
+      left: scrollAmount,
+      behavior: "smooth",
     });
-</script>
+  }
+}
+
+async function showMovieData() {
+  const apiKey = "09a966dc92563a26c9fe76e249b32585";
+
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc`
+    );
+
+    const movies = response.data.results;
+
+    movies.forEach((movie, index) => {
+      sliders.insertAdjacentHTML(
+        "beforeend",
+        `<img class="img-${index} slider-img" src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"/>`
+      );
+    });
+
+    const firstImage = document.querySelector("img-0");
+    if (firstImage) {
+      scrollPerClick = firstImage + imagePadding;
+    }
+  } catch (error) {
+    console.error("erro ao buscar filme", error);
+  }
+}
+
+showMovieData();

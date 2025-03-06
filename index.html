@@ -12,35 +12,6 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="script.js"> </script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 5, // Quantidade de slides visíveis
-        spaceBetween: 10, // Espaço entre os slides
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-            // Responsividade
-            320: {
-                slidesPerView: 2,
-                spaceBetween: 10,
-            },
-            768: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            },
-            1024: {
-                slidesPerView: 5,
-                spaceBetween: 30,
-            },
-        },
-    });
-</script>
 
 </head>
 
@@ -67,23 +38,28 @@
   </div>
   
   <h2>Top 10 Filmes da Netflix</h2>
-  <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="./imagens/1.jpeg" alt="Filme 1"></div>
-          <div class="swiper-slide"><img src="./imagens/2.jpeg" alt="Filme 2"></div>
-          <div class="swiper-slide"><img src="./imagens/3.jpeg" alt="Filme 3"></div>
-          <div class="swiper-slide"><img src="./imagens/4.jpg" alt="Filme 4"></div>
-          <div class="swiper-slide"><img src="./imagens/5.png" alt="Filme 5"></div>
-          <div class="swiper-slide"><img src="./imagens/6.jpg" alt="Filme 6"></div>
-          <div class="swiper-slide"><img src="./imagens/7.jpeg" alt="Filme 7"></div>
-          <div class="swiper-slide"><img src="./imagens/8.jpg" alt="Filme 8"></div>
-          <div class="swiper-slide"><img src="./imagens/9.jpg" alt="Filme 9"></div>
-          <div class="swiper-slide"><img src="./imagens/10.jpg" alt="Filme 10"></div>
+  <div class="center">
+    <div class="carrossel">
+      <div class="carrosselBox">
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+      <a
+        class="switchLeft sliderButton btnstyle"
+        onclick="sliderScrollLeft()"
+      >
+        <
+      </a>
+      <a
+        class="switchRight sliderButton btnstyle"
+        onclick="sliderScrollRight()"
+      >
+        >
+      </a>
+    </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
  
     <section class="features-section">
         <div class="feature">
@@ -126,43 +102,72 @@
           </form>
     </section>
     
-    <footer class="footer">
-        <p>Dúvidas? Ligue para 0800-391-2876</p>
-        <div class="footer-links">
-          <ul>
-            <li><a href="#">Perguntas frequentes</a></li>
-            <li><a href="#">Relações com investidores</a></li>
-            <li><a href="#">Formas de assistir</a></li>
-            <li><a href="#">Informações corporativas</a></li>
-            <li><a href="#">Só na Netflix</a></li>
-          </ul>
-          <ul>
-            <li><a href="#">Central de Ajuda</a></li>
-            <li><a href="#">Carreiras</a></li>
-            <li><a href="#">Termos de Uso</a></li>
-            <li><a href="#">Entre em contato</a></li>
-          </ul>
-          <ul>
-            <li><a href="#">Conta</a></li>
-            <li><a href="#">Resgatar cartão pré-pago</a></li>
-            <li><a href="#">Privacidade</a></li>
-            <li><a href="#">Teste de velocidade</a></li>
-          </ul>
-          <ul>
-            <li><a href="#">Media Center</a></li>
-            <li><a href="#">Comprar cartão pré-pago</a></li>
-            <li><a href="#">Preferências de cookies</a></li>
-            <li><a href="#">Avisos legais</a></li>
-          </ul>
-        </div>
-        <div class="language-selector">
-          <select>
-            <option value="pt">Português</option>
-            <option value="en">English</option>
-          </select>
-        </div>
-        <p class="netflix-brand">Netflix Brasil</p>
-      </footer>
+    <ul class="footer-links">
+      <li>
+          <a href="https://help.netflix.com/pt/node/412">Perguntas frequentes</a>
+      </li>
+      <li>
+          <a href="https://help.netflix.com/">Centro de ajuda</a>
+      </li>
+      <li>
+          <a href="https://www.netflix.com/youraccount">Conta</a>
+      </li>
+      <li>
+          <a href="https://media.netflix.com/">Media Center</a>
+      </li>
+      <li>
+          <a href="http://ir.netflix.com/">Relações com investidores</a>
+      </li>
+      <li>
+          <a href="https://jobs.netflix.com/jobs">Carreiras</a>
+      </li>
+      <li>
+          <a href="https://www.netflix.com/redeem">Resgatar cartão pré-pago</a>
+      </li>
+      <li>
+          <a href="https://www.netflix.com/gift-cards">Comprar cartão pré-pago</a>
+      </li>
+      <li>
+          <a href="https://help.netflix.com/pt/node/14361">Formas de assistir</a>
+      </li>
+      <li>
+          <a href="https://help.netflix.com/legal/termsofuse">Termos de uso</a>
+      </li>
+      <li>
+          <a href="https://help.netflix.com/legal/privacy">Privacidade</a>
+      </li>
+      <li>
+          <a href="https://www.netflix.com/br-en/#">Preferências de cookies</a>
+      </li>
+      <li>
+          <a href="https://help.netflix.com/legal/corpinfo">Informações corporativas</a>
+      </li>
+      <li>
+          <a href="https://help.netflix.com/contactus">Entre em contato</a>
+      </li>
+      <li>
+          <a href="https://fast.com/">Teste de velocidade</a>
+      </li>
+      <li>
+          <a href="https://help.netflix.com/legal/notices">Avisos legais</a>
+      </li>
+      <li>
+          <a href="https://www.netflix.com/br-en/browse/genre/839338">Só na Netflix</a>
+      </li>
+  </ul>
+  <div class="footer-btn-wrapper">
+      <img src="./assets/internet.png" alt="internet" />
+      <select name="language" id="languageDown" onchange="location.href=this.value">
+          <option value="https://luk4x.github.io/netflix-start-page-clone/br">Português</option>
+          <option value="https://luk4x.github.io/netflix-start-page-clone/">English</option>
+      </select>
+      <i class="bx bxs-down-arrow"></i>
+  </div>
+  <p class="netflix-footer-paragraph">Netflix Brasil</p>
+</div>
+</footer>
+</body>
+<script src="./app.js"></script>
 </body>
 
 </html>
